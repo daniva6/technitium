@@ -3,4 +3,11 @@ kind: Kustomization
 
 resources:
 - ../../base
-       
+
+patches:
+  - target:
+      kind: Service
+      name: technitium
+    patch: |-
+      - op: remove
+        path: /spec/loadBalancerIP
