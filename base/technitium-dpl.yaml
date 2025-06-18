@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  names: technitium
+  name: technitium
   labels:
     app: dns-server
 spec:
