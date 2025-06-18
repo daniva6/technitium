@@ -1,0 +1,38 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: technitium-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`technitium.<path:k8s-secrets/data/common#sdn>`)
+      kind: Rule
+      services:
+        - name: technitium-web
+          port: 80
+          sticky:
+            cookie:
+              httpOnly: false
+              name: technitium-session
+              secure: true
+              sameSite: "true"          
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: technitium
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`technitium.<path:k8s-secrets/data/common#sdn>`)
+      kind: Rule
+      middlewares:
+        - name: redirect-https
+          namespace: traefik
+      services:
+        - name: technitium-web
+          port: 80
+

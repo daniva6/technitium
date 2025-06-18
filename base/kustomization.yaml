@@ -6,4 +6,5 @@ resources:
 - technitium-pvc.yaml
 - technitium-svc.yaml
 - technitium-web-svc.yaml
+- technitium-ir.yaml
 - technitium-dpl.yaml
