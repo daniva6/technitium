@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: tsdb
+    namespace: technitium
     server: https://kubernetes.default.svc
   project: default
   source:
