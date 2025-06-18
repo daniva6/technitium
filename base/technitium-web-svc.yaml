@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: technitium-web
+spec:
+  ports:
+  - name: web-http
+    port: 80
+    targetPort: 5380
+    protocol: TCP
+  selector:
+    app: dns-server

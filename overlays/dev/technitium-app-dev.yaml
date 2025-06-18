@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: technitium
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: tsdb
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: overlays/dev
+    repoURL: git@github.com:daniva6/technitium.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true 
+    # automated:
+      # selfHeal: true      

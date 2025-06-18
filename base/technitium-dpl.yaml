@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  names: technitium
+  labels:
+    app: dns-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dns-server
+  template:
+    metadata:
+      labels:
+        app: dns-server
+    spec:
+      containers:
+      - name: dns-server
+        image: technitium/dns-server:13.6.0
+        ports:
+        - name: web-http
+          containerPort: 5380
+          protocol: TCP
+        - name: dnsudp
+          containerPort: 53
+          protocol: UDP
+        - name: dnstcp
+          containerPort: 53
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: technitium
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5380
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 5380
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /
+            port: 5380
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        # resources:
+          # requests:
+            # cpu: 100m
+            # memory: 1Gi
+          # limits:
+            # memory: 3Gi          
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/dns          
+      volumes:
+      - name: config-volume
+        persistentVolumeClaim:
+          claimName: technitium
