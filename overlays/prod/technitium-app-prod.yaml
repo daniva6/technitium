@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: overlays/prod
-    repoURL: git@github.com:daniva6/technitium.git
+    repoURL: https://github.com/daniva6/technitium.git
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
