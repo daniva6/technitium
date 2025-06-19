@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: technitium
 data:
-  DNS_SERVER_DOMAIN: "dns-server"
-  # Uncomment and modify values as needed:
-  DNS_SERVER_ADMIN_PASSWORD: "password"
-  DNS_SERVER_FORWARDERS: "1.1.1.1, 8.8.8.8"
+  DNS_SERVER_DOMAIN: '<path:k8s-secrets/data/common#sdn>'
+  DNS_SERVER_ADMIN_PASSWORD: '<path:k8s-secrets/data/technitium#password>'
+  DNS_SERVER_FORWARDERS: '1.1.1.1, 8.8.8.81
