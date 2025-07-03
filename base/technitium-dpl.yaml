@@ -71,4 +71,4 @@ spec:
       volumes:
       - name: config-volume
         persistentVolumeClaim:
-          claimName: technitium
+          claimName: technitium2
