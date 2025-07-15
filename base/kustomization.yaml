@@ -3,7 +3,7 @@ kind: Kustomization
   
 resources:
 - technitium-cm.yaml
-- technitium-pvc.yaml
+- technitium2-pvc.yaml
 - technitium-svc.yaml
 - technitium-web-svc.yaml
 - technitium-ir.yaml
